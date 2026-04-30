@@ -30,7 +30,7 @@ while True:
     flat_img = hsv_img.flatten().reshape(1, -1)
 
     # -----------------------------
-    # 🔥 FIRE COLOR FILTER
+    #  FIRE COLOR FILTER
     # -----------------------------
     hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
@@ -41,7 +41,7 @@ while True:
     fire_pixels = cv2.countNonZero(mask)
 
     # -----------------------------
-    # 🤖 PREDICTION LOGIC
+    #  PREDICTION LOGIC
     # -----------------------------
     if fire_pixels > 3000:
         prediction = model.predict(flat_img)[0]
@@ -49,7 +49,7 @@ while True:
         prediction = 0  # force SAFE if no fire-like color
 
     # -----------------------------
-    # 📉 SMOOTHING (anti-flicker)
+    #  SMOOTHING (anti-flicker)
     # -----------------------------
     preds.append(prediction)
     if len(preds) > 10:
@@ -58,7 +58,7 @@ while True:
     final_pred = round(sum(preds) / len(preds))
 
     # -----------------------------
-    # 🖥️ DISPLAY
+    #  DISPLAY
     # -----------------------------
     if final_pred == 1:
         label = "🔥 FIRE DETECTED"
